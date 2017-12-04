@@ -1,7 +1,7 @@
 //your variable declarations here
   Stars[] sue = new Stars[200];
   Spaceship bob = new Spaceship();
-  Asteroid[] yev = new Asteroid[30];
+  ArrayList <Asteroid> yev = new ArrayList <Asteroid>();
 public void setup() 
 {
   size(500,500);
@@ -10,8 +10,8 @@ public void setup()
   for (int i = 0; i < sue.length; i++){
    sue[i] = new Stars(); 
   }
-  for (int i = 0; i < yev.length; i++){
-   yev[i] = new Asteroid(); 
+  for (int i = 0; i < 30; i++){
+   yev.add(new Asteroid()); 
   }
 }
 public void draw() 
@@ -22,10 +22,16 @@ public void draw()
   for (int i = 0; i < sue.length; i++){
    sue[i].show();
   }
-  for (int i = 0; i < yev.length; i++){
-   yev[i].show();
-   yev[i].move();
-   yev[i].setrotSpeed((int)(Math.random() * 3));
+  for (int i = 0; i < yev.size(); i++){
+   yev.get(i).show();
+   yev.get(i).move();
+   yev.get(i).setrotSpeed((int)(Math.random() * 3));
+   if(dist((float)(yev.get(i).getX()),
+   (float)(yev.get(i).getY()),
+   (float)(bob.getX()),
+   (float)(bob.getY())) < 20){
+     yev.remove(i);
+   }
   }
 }
 
