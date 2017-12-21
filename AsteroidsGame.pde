@@ -2,6 +2,7 @@
   Stars[] sue = new Stars[200];
   Spaceship bob = new Spaceship();
   ArrayList <Asteroid> yev = new ArrayList <Asteroid>();
+  ArrayList <Bullet> yev2 = new ArrayList <Bullet>();
 public void setup() 
 {
   size(500,500);
@@ -12,6 +13,10 @@ public void setup()
   }
   for (int i = 0; i < 30; i++){
    yev.add(new Asteroid()); 
+  }
+
+  for (int i = 0; i < yev2.size(); i++){
+    yev2. add(new Bullet(bob));
   }
 }
 public void draw() 
@@ -33,6 +38,23 @@ public void draw()
      yev.remove(i);
    }
   }
+  for (int i = 0; i < yev2.size(); i++){
+    yev2.get(i).show();
+    yev2.get(i).move();
+  }
+
+for(int i = 0; i < yev2.size(); i++){
+  for( int j = 0; j < yev.size(); j++){
+  if(dist((float)(yev.get(j).getX()),
+   (float)(yev.get(j).getY()),
+   (float)(yev2.get(i).getX()),
+   (float)(yev2.get(i).getY())) < 20){
+     yev.remove(j);
+    yev2.remove(i);
+    break;
+   }
+  }
+  }
 }
 
 public void keyTyped(){
@@ -49,5 +71,11 @@ public void keyTyped(){
   }
   if (key == '2'){
    bob.accelerate(1);
+  }
+
+  if (key == '3'){
+    if(yev2.size() < 300){
+    yev2. add(new Bullet(bob));
+    }
   }
 }
